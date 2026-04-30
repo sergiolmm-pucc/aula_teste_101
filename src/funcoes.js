@@ -7,7 +7,7 @@ const TABELA = {
 		 { ate: 30, alicota: 0.03 },
 		],
 	},
-	REFERENCIA : 0.20,
+	REFERENCIA : 20/100,
 };
 
 function calcularArea(base,altura) {
