@@ -14,19 +14,22 @@ jobs:
         uses: actions/checkout@v6
       - name: verifica se fez corretamente
         run:  ls -la
-      - name: Instala o Node na maquina virtual
+      - name: Instala o Node na maquina virtual        
         uses: actions/setup-node@v3
       - name: Instala as dependencias do projeto
+        working-directory: api 
         run: npm ci
       - name: Roda os testes
+        working-directory: api 
         run: npm run test 
       - name: verifica se fez corretamente
+        working-directory: api 
         run:  ls -la        
       - name: Gera relatorio de testes
         uses: dorny/test-reporter@v1
         if: success() || failure()  # roda de qualquer maneira
         with:
           name: JEST tests
-          path: ./j*.xml
+          path: ./api/j*.xml
           reporter: jest-junit
           
