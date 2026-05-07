@@ -15,7 +15,7 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/api/tabelas', (req, res) => {
-  const { TABELA } = require('./funcoes');
+  const { TABELA, calcular } = require('./funcoes');
   res.json({
 	success: true,
 	data: {
@@ -24,6 +24,26 @@ app.get('/api/tabelas', (req, res) => {
 	},
   });
 
+});
+
+// POST /api/calcular
+app.post('/api/calcular', (req, res) => {
+  try {
+	const { TABELA, calcular } = require('./funcoes');
+    const dados = req.body;
+	console.log(dados);
+
+    if (!dados || typeof dados !== 'object') {
+      return res.status(400).json({ error: 'Corpo da requisição inválido' });
+    }
+    
+    const resultado = calcular(dados);
+	console.log(resultado);
+    return res.status(200).json({ success: true, data: resultado });
+  } catch (err) {
+	console.log(err.message);
+    return res.status(400).json({ success: false, error: err.message });
+  }
 });
 
 module.exports = app
