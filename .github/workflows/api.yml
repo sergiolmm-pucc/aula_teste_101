@@ -12,8 +12,8 @@ jobs:
       api: ${{ steps.changes.outputs.api }}
       app: ${{ steps.changes.outputs.app }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v4
         id: changes
         with:
           filters: |
@@ -34,7 +34,7 @@ jobs:
       - name: verifica se fez corretamente
         run:  ls -la
       - name: Instala o Node na maquina virtual        
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
       - name: Instala as dependencias do projeto
         working-directory: api 
         run: npm ci
@@ -65,6 +65,6 @@ jobs:
             --header 'accept: application/json' \
             --header 'authorization: Bearer ${{ secrets.RENDER_API_KEY }}' \
             --header 'content-type: application/json' \
-            -data '{"clearCache": "do_not_clear", "deployMode":"build_and_deploy"}'
+            --data '{"clearCache": "do_not_clear", "deployMode":"build_and_deploy"}'
 
-            
+
