@@ -11,7 +11,7 @@ app.use(express.json());
 
 // checa se api no ar
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() , by:'SLMM2'});
+  res.json({ status: 'ok', timestamp: new Date().toISOString() , by:'SLMM3'});
 });
 
 app.get('/api/tabelas', (req, res) => {
