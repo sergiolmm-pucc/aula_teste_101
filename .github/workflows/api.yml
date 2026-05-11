@@ -45,7 +45,7 @@ jobs:
         working-directory: api 
         run:  ls -la        
       - name: Gera relatorio de testes
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         if: success() || failure()  # roda de qualquer maneira
         with:
           name: JEST tests
@@ -59,11 +59,15 @@ jobs:
     steps:
       - name: Deploy Project 1
         run: |
-          curl --request POST \
+          RESPONSE=$(curl --request POST \
                --url https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID_1 }}/deploys \
                --header 'accept: application/json' \
                --header 'authorization: Bearer ${{ secrets.RENDER_API_KEY }}' \
                --header 'content-type: application/json' \
-               --data '{ "clearCache": "do_not_clear", "deployMode": "build_and_deploy" }'
+               --data '{ "clearCache": "do_not_clear", "deployMode": "build_and_deploy" }')
 
+          echo "Deploy response: $RESPONSE"
 
+          DEPLOY_ID=$(echo $RESPONSE | jq -r '.id')
+          echo "deploy_id=$DEPLOY_ID" >> $GITHUB_OUTPUT
+          echo "Deploy ID: $DEPLOY_ID"
