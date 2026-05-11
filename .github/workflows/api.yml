@@ -51,7 +51,24 @@ jobs:
           name: JEST tests
           path: ./api/j*.xml
           reporter: jest-junit
-          
+      - name: Roda os testes Funcionais
+        if: success() 
+        working-directory: e2e-tests
+        run: npm run test 
+      - name: verifica se fez corretamente
+        working-directory: e2e-tests 
+        run:  ls -la          
+      - name: fotos da tela
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fotos dos testes
+          # Path to the release files
+          # Gravar as fotos na raiz do projeto no docker
+
+          # path: /home/runner/work//aula_teste_101/aula_teste_101/e2e-tests/screenshots/**/*.png
+          path: /home/runner/work//aula_teste_101/aula_teste_101/e2e-tests/screenshots/*.png
+      
   deploy-api:
     needs: unitTestApi
     if: success()    
