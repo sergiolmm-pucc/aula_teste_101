@@ -4,16 +4,7 @@ on:
   push:
     branches: [main, dev]
 
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: Environment
-        type: choice
-        required: true
-        default: dev
-        options:
-              - web
-
+  
 jobs:
   detect-changes:
     runs-on: ubuntu-latest
