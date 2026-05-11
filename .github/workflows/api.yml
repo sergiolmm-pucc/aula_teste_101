@@ -74,7 +74,7 @@ jobs:
 
       - name: Wait for deploy to complete
         run: |
-          DEPLOY_ID="${{ steps.deploy.outputs.deploy_id }}"
+          DEPLOY_ID="${{ steps.deploy_api.outputs.deploy_id }}"
           SERVICE_ID="${{ secrets.RENDER_SERVICE_ID_1 }}"
           MAX_ATTEMPTS=30   # 30 x 20s = 10 minutos
           ATTEMPT=0
