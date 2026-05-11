@@ -59,12 +59,10 @@ jobs:
     steps:
       - name: Deploy Project 1
         run: |
-          curl --fail --silent --show-error -X POST \
-            "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID_1 }}/deploys" \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{"clearCache": "doNotClear"}'
+          curl --fail --silent --show-error -request POST \
+            --url "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID_1 }}/deploys" \
+            --header 'accept: application/json' \
+            --header 'authorization: Bearer ${{ secrets.RENDER_API_KEY }}' \
+            --header 'content-type: application/json' \
+            -data '{"clearCache": "do_not_clear", "deployMode":"build_and_deploy"}'
 
-
-
-  
