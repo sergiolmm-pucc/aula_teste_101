@@ -59,7 +59,8 @@ jobs:
     steps:
       - name: Deploy Project 1
         run: |
-          curl --fail --silent --show-error -request POST \
+          curl --fail --silent --show-error  \
+            --request POST \
             --url "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID_1 }}/deploys" \
             --header 'accept: application/json' \
             --header 'authorization: Bearer ${{ secrets.RENDER_API_KEY }}' \
