@@ -58,7 +58,10 @@ jobs:
         env:
           PORT: 3001
           NODE_ENV: test
-
+      - name: Instala as dependencias do projeto
+        working-directory: app 
+        run: npm ci
+        
       - name: Subir o site em background
         working-directory: app
         run: npm run start &
